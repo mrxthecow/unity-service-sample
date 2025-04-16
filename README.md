@@ -61,19 +61,48 @@ Implement a working **multiplayer matching system** using Unity Relay & Netcode.
 
 ---
 
+## ✅ Git Commit Expectations
+
+As part of this challenge, we expect you to follow **conventional commit** standards for clarity and professionalism in your version control history.
+
+### 🧼 Clean Commit Guidelines
+
+- Each commit should represent a **single logical change**.
+- Use clear, descriptive messages that reflect the change made.
+- Prefix each commit with a **type** and optional **scope**:
+  - `feat`: a new feature (e.g., `feat(matchmaking): add relay server setup`)
+  - `fix`: a bug fix (e.g., `fix(game-scene): handle disconnect edge case`)
+  - `chore`: maintenance or setup (e.g., `chore: add Unity Relay package`)
+  - `refactor`: code restructuring without changing behavior
+  - `docs`: changes to documentation
+  - `test`: adding or updating tests
+
+Keeping a clean Git history shows professionalism and makes your work easier to review and maintain.
+
+### ✅ Commit Message Examples
+
+```bash
+feat(menu): implement basic matchmaking UI
+feat(matchmaking): connect players using Unity Relay
+fix(transition): ensure scene change only triggers after full connection
+refactor(network): extract network logic into Matchmaker class
+```
+
+---
+
 ## 🌟 Bonus Objectives
 
 You’ll stand out if you implement any of the following:
 
-- 🕹️ **Game interaction:**  
-  Sync a simple action in the `Game` scene using `ServerRpc` or `ClientRpc`.  
+- 🕹️ **Game interaction:**
+  Sync a simple action in the `Game` scene using `ServerRpc` or `ClientRpc`.
   Example: A button that sends a message to both clients.
 
-- 🔁 **Reconnect Handling:**  
-  If one player disconnects, return to the `Menu` screen.  
+- 🔁 **Reconnect Handling:**
+  If one player disconnects, return to the `Menu` screen.
   Let players reconnect afterward.
 
-- 📦 **Session Reset:**  
+- 📦 **Session Reset:**
   Implement server shutdown logic and gracefully handle cleanup (e.g., return to `Menu` on both sides).
 
 ---
