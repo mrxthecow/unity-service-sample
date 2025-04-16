@@ -165,6 +165,20 @@ git push origin <your-feature-branch>
 
 ---
 
+ℹ️ Testing Note
+
+You can use Unity’s built-in Multiplayer Play Mode to simulate multiple clients in the same project instance without opening a second Unity editor.
+This can help you test both Host and Client flows more easily during development.
+
+To enable this:
+1.	Go to Multiplayer Tools > Multiplayer Play Mode.
+2.	Set the mode to “Host and Client” or “Client and Host”.
+3.	Press Play to simulate a multiplayer session in a single Unity Editor window.
+
+This is useful for testing matchmaking and scene transitions without the need for multiple Unity instances.
+
+---
+
 ## 🙌 Good Luck!
 
 This project is part of the **Braverse Multiplayer Initiative**.  
