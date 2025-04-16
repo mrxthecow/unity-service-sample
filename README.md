@@ -103,7 +103,7 @@ You’ll stand out if you implement any of the following:
   Let players reconnect afterward.
 
 - 📦 **Session Reset:**
-  Implement server shutdown logic and gracefully handle cleanup (e.g., return to `Menu` on both sides).
+  Implement server shutdown logic and gracefully handle cleanup (e.g., return to `Menu`).
 
 ---
 
