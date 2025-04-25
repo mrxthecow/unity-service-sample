@@ -10,6 +10,7 @@ using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
+using com.buho.NetworkPack.Scene;
 
 public class AutoMatchmaker : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class AutoMatchmaker : MonoBehaviour
 
     public async void StartMatchmaking()
     {
+        UIManagerMenu.instance.SetMessage(true, "Matching...");
         QueryResponse response = await LobbyService.Instance.QueryLobbiesAsync(new QueryLobbiesOptions
         {
             Filters = new List<QueryFilter>
@@ -72,6 +74,7 @@ public class AutoMatchmaker : MonoBehaviour
 
         NetworkManager.Singleton.StartHost();
         isHost = true;
+        StartCoroutine(WaitForAllClientsThenLoadGame());
     }
 
     private async Task JoinLobbyAsClient(Lobby lobby)
@@ -102,6 +105,21 @@ public class AutoMatchmaker : MonoBehaviour
         {
             yield return new WaitForSeconds(15);
             LobbyService.Instance.SendHeartbeatPingAsync(lobbyId);
+        }
+    }
+    private IEnumerator WaitForAllClientsThenLoadGame()
+    {
+        Debug.Log("Wating for new player to join...");
+        while (true)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            if (NetworkManager.Singleton.IsHost && NetworkManager.Singleton.ConnectedClients.Count >= 2)
+            {
+                Debug.Log("[Host] 所有人已連線，開始轉場！");
+                SceneTransitionManager.Instance.LoadNetworkedScene("Game");
+                yield break;
+            }
         }
     }
 }
