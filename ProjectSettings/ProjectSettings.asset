@@ -930,11 +930,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: f571beda-58f5-4d15-917e-528378b6dfd2
+  cloudProjectId: cd9f7682-faee-4f06-a648-27f49874aab7
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: UnityServiceSample
-  organizationId: casualattitude0_unity308
+  projectName: Buho
+  organizationId: mrxxmrx
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
