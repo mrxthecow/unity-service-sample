@@ -21,6 +21,8 @@ public class AutoMatchmaker : MonoBehaviour
     private async void Start()
     {
         await UnityServices.InitializeAsync();
+
+        if (SceneTransitionManager.Instance != null) SceneTransitionManager.Instance.FadeOut();
         if (!AuthenticationService.Instance.IsSignedIn)
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
@@ -116,7 +118,7 @@ public class AutoMatchmaker : MonoBehaviour
 
             if (NetworkManager.Singleton.IsHost && NetworkManager.Singleton.ConnectedClients.Count >= 2)
             {
-                Debug.Log("[Host] 所有人已連線，開始轉場！");
+                Debug.Log("Connected");
                 SceneTransitionManager.Instance.LoadNetworkedScene("Game");
                 yield break;
             }
