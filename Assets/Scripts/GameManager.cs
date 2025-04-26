@@ -55,7 +55,8 @@ public class GameManager : NetworkBehaviour
     public void Select(int choice)
     {
         SubmitChoiceServerRpc(choice);
-        UIManagerGame.instance.CloseBtn();
+        UIManagerGame.instance.CloseBtn(); 
+        UIManagerGame.instance.SetSprite(UIManagerGame.side.you, choice);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -78,7 +79,7 @@ public class GameManager : NetworkBehaviour
 
         int result = Judge(choiceA, choiceB); // 0=draw, 1=player[0] wins, 2=player[1] wins
 
-        ShowResultClientRpc(players[0], players[1], result);
+        ShowResultClientRpc(players[0], choiceA, players[1], choiceB, result);
         playerChoices.Clear();
     }
 
@@ -90,19 +91,33 @@ public class GameManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void ShowResultClientRpc(ulong player0, ulong player1, int result)
+    private void ShowResultClientRpc(ulong player0, int choice0, ulong player1, int choice1, int result)
     {
         ulong localId = NetworkManager.Singleton.LocalClientId;
 
         string message = "";
-        if (result == 0) message = "平手";
+        if (result == 0)
+        { 
+            message = "平手";
+            UIManagerGame.instance.SetResultMessage(0);
+        }
         else if ((result == 1 && localId == player0) || (result == 2 && localId == player1))
+        {
             message = "你贏了！";
+            UIManagerGame.instance.SetResultMessage(1);
+        }
         else
+        {
             message = "你輸了！";
+            UIManagerGame.instance.SetResultMessage(2);
+        }
+
+        if (localId == player0) UIManagerGame.instance.SetSprite(UIManagerGame.side.opponent, choice1);
+        else UIManagerGame.instance.SetSprite(UIManagerGame.side.opponent, choice0);
 
         Debug.Log($"結果：{message}");
-        // 可以接著更新 UI 顯示
+        UIManagerGame.instance.ShowLeaveHint();
     }
+
 }
 
